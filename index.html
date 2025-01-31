@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Recommender</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Questions Container -->
+      <div id="questionnaire-container">
+        <!-- Questions Container -->
+        <div id="questionnaire">
+          <!-- Questions will be dynamically inserted here -->
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+          <button id="backBtn" class="nav-btn" disabled>
+            <span class="arrow">‹</span>
+            <span>Geri</span>
+          </button>
+
+          <button id="nextBtn" class="nav-btn" disabled>
+            <span>İleri</span>
+            <span class="arrow">›</span>
+          </button>
+        </div>
+
+        <!-- Progress Indicators -->
+        <div id="progress-tabs" class="progress-tabs">
+          <!-- Tabs will be dynamically inserted here -->
+        </div>
+      </div>
+
+      <!-- Products Carousel -->
+      <div id="products-carousel" class="hidden">
+        <div class="carousel-container">
+          <button class="carousel-btn prev">←</button>
+          <div class="carousel-track">
+            <!-- Products will be inserted here -->
+          </div>
+          <button class="carousel-btn next">→</button>
+        </div>
+      </div>
+      <div id="carousel-progress-tabs" class="progress-tabs">
+        <!-- Carousel tabs will be dynamically inserted here -->
+      </div>
+    </div>
+    <script src="src/main.js"></script>
+  </body>
+</html>
