@@ -71,7 +71,7 @@ body {
 
 .option.selected {
   background: #000;
-  color: white;
+  color: #fff;
   border-color: #000;
 }
 
@@ -83,7 +83,7 @@ body {
 }
 
 .color-option.selected {
-  box-shadow: 0 0 0 2px white, 0 0 0 4px #000;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
   border: none;
 }
 
@@ -103,14 +103,14 @@ body {
   gap: 0.5rem;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: white;
+  background: #fff;
   border: 2px solid #ddd;
 }
 
 .nav-btn:hover {
-  background: black;
-  color: white;
-  border: black;
+  background: #000;
+  color: #fff;
+  border: #000;
 }
 
 .nav-btn:disabled {
@@ -158,10 +158,33 @@ body {
   box-sizing: border-box;
 }
 
+.image-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+}
+
 .product-card img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-card img.loaded {
+  opacity: 1;
 }
 
 .product-card h3 {
@@ -214,8 +237,8 @@ body {
 }
 
 .view-product-btn {
-  background: black;
-  color: white;
+  background: #000;
+  color: #fff;
   padding: 1rem 2rem;
   border: none;
   border-radius: 100px;
@@ -241,6 +264,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+button:hover {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hidden {

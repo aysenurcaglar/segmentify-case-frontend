@@ -212,7 +212,14 @@ function renderCarousel(filteredProducts) {
     .map(
       (product) => `
         <div class="product-card">
-          <img src="${product.image}" alt="${product.name}">
+          <div class="image-container">
+            <div class="loader">loading</div>
+            <img 
+              data-src="${product.image}" 
+              alt="${product.name}"
+              loading="lazy"
+            >
+          </div>
           <h3>${product.name}</h3>
           <div class="price">
             ${
@@ -232,6 +239,8 @@ function renderCarousel(filteredProducts) {
     )
     .join("");
 
+  setupLazyLoading();
+
   // Render carousel progress tabs
   carouselProgressTabs.innerHTML = filteredProducts
     .map(
@@ -243,6 +252,39 @@ function renderCarousel(filteredProducts) {
     .join("");
 
   setupCarousel();
+}
+
+function setupLazyLoading() {
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+
+          img.onload = () => {
+            img.classList.add("loaded");
+            const loader = img.parentElement.querySelector(".loader");
+            if (loader) {
+              loader.remove();
+            }
+          };
+
+          observer.unobserve(img);
+        }
+      });
+    },
+    {
+      root: null,
+      rootMargin: "50px",
+      threshold: 0.1,
+    }
+  );
+
+  // Observe all images
+  document.querySelectorAll(".product-card img[data-src]").forEach((img) => {
+    imageObserver.observe(img);
+  });
 }
 
 function setupCarousel() {
