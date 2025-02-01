@@ -213,7 +213,7 @@ function renderCarousel(filteredProducts) {
       (product) => `
         <div class="product-card">
           <div class="image-container">
-            <div class="loader">loading</div>
+            <div class="loader">Loading...</div>
             <img 
               data-src="${product.image}" 
               alt="${product.name}"

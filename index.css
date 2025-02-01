@@ -156,6 +156,9 @@ body {
   padding: 2rem;
   text-align: center;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image-container {
@@ -188,13 +191,15 @@ body {
 }
 
 .product-card h3 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
 }
 
 .product-card .price {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .product-card .original-price {
@@ -245,6 +250,8 @@ body {
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-top: auto;
 }
 
 .view-product-btn:hover {
