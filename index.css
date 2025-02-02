@@ -57,6 +57,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .option {
@@ -81,7 +82,7 @@ body {
 
 .color-option {
   width: 40px;
-  height: 40px;
+  aspect-ratio: 1 / 1;
   padding: 0;
   border-radius: 50%;
 }
@@ -126,6 +127,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 0.25rem;
+  flex-wrap: wrap;
 }
 
 .tab {
@@ -205,6 +207,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  font-weight: bold;
 }
 
 .product-card .original-price {
@@ -214,7 +217,6 @@ body {
 
 .product-card .sale-price {
   color: #ff4444;
-  font-weight: bold;
 }
 
 .carousel-btn {
@@ -287,4 +289,27 @@ button:hover {
 
 .hidden {
   display: none !important;
+}
+
+@media (max-width: 480px) {
+  .color-options {
+    justify-content: space-between;
+  }
+  .color-options > * {
+    flex: 1 1 calc(33.333% - 1rem);
+    width: 15px;
+    margin-bottom: 1rem;
+  }
+
+  .navigation {
+    margin: 0 0.5rem 2rem 0.5rem;
+  }
+
+  #questionnaire {
+    min-height: 80vh;
+  }
+
+  .carousel-container {
+    min-height: 80vh;
+  }
 }

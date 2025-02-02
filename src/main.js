@@ -53,7 +53,7 @@ function renderQuestion() {
     // For color questions, render color options
     answersHTML = currentQuestion.answers
       .map((answer) => {
-        const colorValue = colorMap[answer.toLowerCase()] || "#000000"; // default to black
+        const colorValue = colorMap[answer.toLowerCase()] || "#ccc"; // default to gray
         return `<button class="option color-option" data-value="${answer}" style="background: ${colorValue};"></button>`;
       })
       .join("");
