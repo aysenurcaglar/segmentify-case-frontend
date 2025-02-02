@@ -5,6 +5,7 @@ let products = [];
 let questions = [];
 let currentQuestionSet = null;
 let currentQuestionIndex = 0;
+let productsFound = false;
 
 // DOM Elements
 const questionnaire = document.getElementById("questionnaire");
@@ -52,7 +53,7 @@ function renderQuestion() {
     // For color questions, render color options
     answersHTML = currentQuestion.answers
       .map((answer) => {
-        const colorValue = colorMap[answer.toLowerCase()] || "#000000"; // default to black if not found
+        const colorValue = colorMap[answer.toLowerCase()] || "#000000"; // default to black
         return `<button class="option color-option" data-value="${answer}" style="background: ${colorValue};"></button>`;
       })
       .join("");
@@ -111,7 +112,15 @@ function setupNavigationListeners() {
 }
 
 function showPreviousQuestion() {
-  if (currentQuestionIndex > 0) {
+  if (
+    !productsFound &&
+    currentQuestionIndex === currentQuestionSet.steps.length - 1
+  ) {
+    // If we're on the no products screen, just go back one step
+    currentQuestionIndex--;
+    renderQuestion();
+    updateProgressTabs();
+  } else if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
     renderQuestion();
     updateProgressTabs();
@@ -150,11 +159,35 @@ function updateProgressTabs() {
 }
 
 function showResults() {
-  document.getElementById("questionnaire-container").classList.add("hidden");
-  productsCarousel.classList.remove("hidden");
-
   const filteredProducts = filterProducts();
-  renderCarousel(filteredProducts);
+  productsFound = filteredProducts.length > 0;
+
+  if (!productsFound) {
+    // Show no products message in questionnaire container
+    questionnaire.innerHTML = `
+      <div class="question">
+        <h2>Ürün Bulunamadı</h2>
+      </div>
+    `;
+
+    // Keep questionnaire visible, hide carousel
+    document
+      .getElementById("questionnaire-container")
+      .classList.remove("hidden");
+    productsCarousel.classList.add("hidden");
+
+    // Update navigation state
+    backBtn.disabled = false;
+    nextBtn.disabled = true;
+
+    // Update progress tabs to show we're still on the last question
+    updateProgressTabs();
+  } else {
+    // Show products in carousel as before
+    document.getElementById("questionnaire-container").classList.add("hidden");
+    productsCarousel.classList.remove("hidden");
+    renderCarousel(filteredProducts);
+  }
 }
 
 function filterProducts() {
@@ -194,18 +227,19 @@ function renderCarousel(filteredProducts) {
     "carousel-progress-tabs"
   );
 
+  /*
   if (filteredProducts.length === 0) {
     carouselTrack.innerHTML = `
       <div class="product-card">
         <p>Ürün Bulunamadı</p>
       </div>
     `;
-    document.querySelector(".carousel-btn.prev").classList.add("hidden");
-    document.querySelector(".carousel-btn.next").classList.add("hidden");
+
     // Hide progress tabs when there are no products
     carouselProgressTabs.innerHTML = "";
     return;
   }
+  */
 
   // Render products
   carouselTrack.innerHTML = filteredProducts
@@ -260,17 +294,19 @@ function setupLazyLoading() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target;
-          img.src = img.dataset.src;
+          setTimeout(() => {
+            img.src = img.dataset.src;
 
-          img.onload = () => {
-            img.classList.add("loaded");
-            const loader = img.parentElement.querySelector(".loader");
-            if (loader) {
-              loader.remove();
-            }
-          };
+            img.onload = () => {
+              img.classList.add("loaded");
+              const loader = img.parentElement.querySelector(".loader");
+              if (loader) {
+                loader.remove();
+              }
+            };
 
-          observer.unobserve(img);
+            observer.unobserve(img);
+          }, 300);
         }
       });
     },

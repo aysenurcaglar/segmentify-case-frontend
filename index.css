@@ -89,8 +89,8 @@ body {
 
 .navigation {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 2rem;
+  justify-content: space-between;
+  margin: 0 3rem 3rem 3rem;
 }
 
 .nav-btn {
@@ -128,12 +128,12 @@ body {
   width: 20px;
   height: 4px;
   border-radius: 2px;
-  background: #ddd;
+  background: #ececec;
   transition: all 0.3s ease;
 }
 
 .tab.active {
-  background: #000;
+  background: #a9a9a9;
   transform: scale(1.2);
 }
 
@@ -165,6 +165,7 @@ body {
   position: relative;
   width: 100%;
   margin-bottom: 1rem;
+  min-height: 60%;
 }
 
 .loader {
@@ -252,10 +253,13 @@ body {
   transition: all 0.3s ease;
   flex-shrink: 0;
   margin-top: auto;
+  text-decoration: none;
 }
 
 .view-product-btn:hover {
-  opacity: 0.9;
+  opacity: 0.8;
+  text-decoration: underline;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #questionnaire {
@@ -263,11 +267,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80vh;
+  min-height: 70vh;
 }
 
 #products-carousel {
-  min-height: 80vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
