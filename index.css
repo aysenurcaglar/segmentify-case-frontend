@@ -42,6 +42,10 @@ body {
   margin: 0 auto;
 }
 
+.price-options .option::after {
+  content: " ₺";
+}
+
 .category-options {
   display: flex;
   flex-direction: column;
