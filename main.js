@@ -112,19 +112,7 @@ function setupNavigationListeners() {
 }
 
 function showPreviousQuestion() {
-  if (
-    !productsFound &&
-    currentQuestionIndex === currentQuestionSet.steps.length - 1
-  ) {
-    // If we're on the no products screen, reset to first question
-    currentQuestionIndex = 0;
-    // Clear all answers
-    Object.keys(userAnswers).forEach((key) => delete userAnswers[key]);
-    // Reset to first question set if we're in a subcategory
-    currentQuestionSet = questions[0];
-    renderQuestion();
-    updateProgressTabs();
-  } else if (currentQuestionIndex > 0) {
+  if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
     renderQuestion();
     updateProgressTabs();
