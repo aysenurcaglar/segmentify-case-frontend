@@ -161,6 +161,9 @@ function showResults() {
       </div>
     `;
 
+    // Ensure the back button takes us to the last question, not second to last
+    currentQuestionIndex += 1;
+
     // Keep questionnaire visible, hide carousel
     document
       .getElementById("questionnaire-container")
