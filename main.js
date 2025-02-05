@@ -127,8 +127,10 @@ function showNextQuestion() {
     currentQuestionIndex++;
     renderQuestion();
     updateProgressTabs();
+    console.log("User answers: ", userAnswers);
   } else {
     showResults();
+    console.log("User answers: ", userAnswers);
   }
 }
 
@@ -152,6 +154,8 @@ function updateProgressTabs() {
 function showResults() {
   const filteredProducts = filterProducts();
   productsFound = filteredProducts.length > 0;
+
+  console.log("Filtered products: ", filteredProducts);
 
   if (!productsFound) {
     // Show no products message in questionnaire container
@@ -208,10 +212,14 @@ function filterProducts() {
 }
 
 function matchPrice(productPrice, priceRange) {
-  const [min, max] = priceRange.split("-").map(Number);
+  // If the price is "2000+"
   if (priceRange.endsWith("+")) {
-    return productPrice >= min;
+    const minPrice = parseInt(priceRange.replace("+", ""));
+    return productPrice >= minPrice;
   }
+
+  // For other price ranges
+  const [min, max] = priceRange.split("-").map(Number);
   return productPrice >= min && productPrice < max;
 }
 
