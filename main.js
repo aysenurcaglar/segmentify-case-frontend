@@ -54,16 +54,19 @@ function renderQuestion() {
     answersHTML = currentQuestion.answers
       .map((answer) => {
         const colorValue = colorMap[answer.toLowerCase()] || "#ccc"; // default to gray
-        return `<button class="option color-option" data-value="${answer}" style="background: ${colorValue};"></button>`;
+        const isSelected =
+          userAnswers[currentQuestion.type] === answer ? "selected" : "";
+        return `<button class="option color-option ${isSelected}" data-value="${answer}" style="background: ${colorValue};"></button>`;
       })
       .join("");
   } else {
     // For other questions, render regular options
     answersHTML = currentQuestion.answers
-      .map(
-        (answer) =>
-          `<button class="option" data-value="${answer}">${answer}</button>`
-      )
+      .map((answer) => {
+        const isSelected =
+          userAnswers[currentQuestion.type] === answer ? "selected" : "";
+        return `<button class="option ${isSelected}" data-value="${answer}">${answer}</button>`;
+      })
       .join("");
   }
 
@@ -215,20 +218,6 @@ function renderCarousel(filteredProducts) {
     "carousel-progress-tabs"
   );
 
-  /*
-  if (filteredProducts.length === 0) {
-    carouselTrack.innerHTML = `
-      <div class="product-card">
-        <p>Ürün Bulunamadı</p>
-      </div>
-    `;
-
-    // Hide progress tabs when there are no products
-    carouselProgressTabs.innerHTML = "";
-    return;
-  }
-  */
-
   // Render products
   carouselTrack.innerHTML = filteredProducts
     .map(
@@ -239,7 +228,6 @@ function renderCarousel(filteredProducts) {
             <img 
               data-src="${product.image}" 
               alt="${product.name}"
-              loading="lazy"
             >
           </div>
           <h3>${product.name}</h3>
@@ -292,7 +280,6 @@ function setupLazyLoading() {
                 loader.remove();
               }
             };
-
             observer.unobserve(img);
           }, 300);
         }
